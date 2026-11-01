@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Основная тема заставки -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Цвет фона экрана-заставки -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+
+        <!-- Иконка по центру экрана (vector drawable или PNG) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/notes</item>
+
+        <!-- Время показа иконки (необязательно, до 1000мс на Android 12+) -->
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+
+        <!-- Какая тема применится после исчезновения Splash Screen -->
+        <item name="postSplashScreenTheme">@style/Base.Theme.MusicInstrumentStore</item>
+    </style>
+</resources>
