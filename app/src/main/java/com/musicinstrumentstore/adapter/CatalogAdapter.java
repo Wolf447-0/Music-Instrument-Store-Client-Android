@@ -57,6 +57,12 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         notifyDataSetChanged();
     }
 
+    public void addItems(List<CatalogProductsResponseDto> newProducts) {
+        int startPosition = this.products.size();
+        this.products.addAll(newProducts);
+        notifyItemRangeInserted(startPosition, newProducts.size());
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView productName, productCategory, productPrice;

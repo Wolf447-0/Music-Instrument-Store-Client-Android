@@ -35,6 +35,12 @@ public class CatalogFragment extends Fragment {
     private List<CatalogProductsResponseDto> products;
     private ShimmerFrameLayout shimmerLayout;
 
+    private int currentPage = 0;
+    private final int PAGE_SIZE = 10;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private GridLayoutManager gridLayoutManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,27 +61,84 @@ public class CatalogFragment extends Fragment {
         shimmerLayout = view.findViewById(R.id.shimmerLayout);
 
         catalogRecycler = view.findViewById(R.id.catalog_recycler);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         catalogRecycler.setLayoutManager(gridLayoutManager);
-
         catalogRecycler.setAdapter(catalogAdapter);
 
-        RetrofitClient.getInstance(getContext())
-                .getCatalogApi().getAllProduct().enqueue(new Callback<List<CatalogProductsResponseDto>>() {
+        catalogRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy > 0) {
+                    int visibleItemCount = gridLayoutManager.getChildCount();
+                    int totalItemCount = gridLayoutManager.getItemCount();
+                    int pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition();
+
+                    if (!isLoading && !isLastPage) {
+                        if ((visibleItemCount + pastVisibleItems) >= totalItemCount) {
+                            currentPage++;
+                            loadNextPage();
+                        }
+                    }
+                }
+            }
+        });
+
+        loadFirstPage();
+    }
+
+
+    private void loadFirstPage() {
+        isLoading = true;
+
+        RetrofitClient.getInstance(getContext()).getCatalogApi()
+                .getAllProduct(0, PAGE_SIZE).enqueue(new Callback<List<CatalogProductsResponseDto>>() {
                     @Override
                     public void onResponse(Call<List<CatalogProductsResponseDto>> call, Response<List<CatalogProductsResponseDto>> response) {
+                        isLoading = false;
 
                         if (shimmerLayout != null) {
                             shimmerLayout.stopShimmer();
                             shimmerLayout.setVisibility(View.GONE);
                         }
 
-                        if(response.isSuccessful() && response.body() != null){
+                        if (response.isSuccessful() && response.body() != null) {
                             catalogRecycler.setVisibility(View.VISIBLE);
                             catalogAdapter.updateDate(response.body());
+
+                            if (response.body().size() < PAGE_SIZE) {
+                                isLastPage = true;
+                            }
                         }
-                        else {
-                            Toast.makeText(getContext(), "Ошибка доступа. Код: " + response.code(), Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    public void onFailure(Call<List<CatalogProductsResponseDto>> call, Throwable t) {
+                        if (shimmerLayout != null) {
+                            shimmerLayout.stopShimmer();
+                            shimmerLayout.setVisibility(View.GONE);
+                        }
+                        Toast.makeText(getContext(), "Ошибка сети", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void loadNextPage() {
+        isLoading = true;
+
+        RetrofitClient.getInstance(getContext()).getCatalogApi()
+                .getAllProduct(currentPage, PAGE_SIZE).enqueue(new Callback<List<CatalogProductsResponseDto>>() {
+                    @Override
+                    public void onResponse(Call<List<CatalogProductsResponseDto>> call, Response<List<CatalogProductsResponseDto>> response) {
+                        isLoading = false;
+                        if (response.isSuccessful() && response.body() != null) {
+                            List<CatalogProductsResponseDto> newItems = response.body();
+                            if (!newItems.isEmpty()) {
+                                catalogAdapter.addItems(newItems);
+                            }
+                            if (newItems.size() < PAGE_SIZE) {
+                                isLastPage = true;
+                            }
                         }
                     }
                     @Override
@@ -88,9 +151,7 @@ public class CatalogFragment extends Fragment {
                     }
                 });
 
-
     }
-
 
     @Override
     public void onResume() {
