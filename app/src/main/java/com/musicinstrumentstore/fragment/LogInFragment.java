@@ -18,8 +18,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.musicinstrumentstore.R;
 import com.musicinstrumentstore.network_service.RetrofitClient;
 import com.musicinstrumentstore.network_service.TokenManager;
-import com.musicinstrumentstore.network_service.dto.LogInRequestDto;
-import com.musicinstrumentstore.network_service.dto.TokenResponseDto;
+import com.musicinstrumentstore.network_service.dto.request.LogInRequestDto;
+import com.musicinstrumentstore.network_service.dto.response.TokenResponseDto;
 
 import retrofit2.Call;
 import retrofit2.Callback;

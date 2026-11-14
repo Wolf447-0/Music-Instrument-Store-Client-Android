@@ -11,7 +11,7 @@
     <item
         android:id="@+id/navigation_basket"
         android:icon="@drawable/basket"
-        android:title="Карзина" />
+        android:title="Корзина" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/profile"

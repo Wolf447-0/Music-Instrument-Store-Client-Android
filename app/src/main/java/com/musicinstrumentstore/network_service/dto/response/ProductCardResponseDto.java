@@ -1,16 +1,26 @@
-package com.musicinstrumentstore.adapter;
+package com.musicinstrumentstore.network_service.dto.response;
 
-public class ProductCard {
+public class ProductCardResponseDto {
     private String imageUrl;
     private String name;
     private String price;
     private String categoryName;
+    private String description;
 
-    public ProductCard(String imageUrl, String name, String price, String categoryName) {
+    public ProductCardResponseDto(String imageUrl, String name, String price, String categoryName, String description) {
         this.imageUrl = imageUrl;
         this.name = name;
         this.price = price;
         this.categoryName = categoryName;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImageUrl() {

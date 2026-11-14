@@ -48,6 +48,16 @@
     <fragment
         android:id="@+id/catalog"
         android:name="com.musicinstrumentstore.fragment.CatalogFragment">
+        <action
+            android:id="@+id/catalog_to_product_card"
+            app:destination="@+id/product_card"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/product_card"
+        android:name="com.musicinstrumentstore.fragment.ProductCardFragment">
 
     </fragment>
 

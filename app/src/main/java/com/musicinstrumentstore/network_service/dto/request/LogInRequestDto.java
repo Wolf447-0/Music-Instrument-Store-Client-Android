@@ -1,4 +1,4 @@
-package com.musicinstrumentstore.network_service.dto;
+package com.musicinstrumentstore.network_service.dto.request;
 
 public class LogInRequestDto {
     private String username;

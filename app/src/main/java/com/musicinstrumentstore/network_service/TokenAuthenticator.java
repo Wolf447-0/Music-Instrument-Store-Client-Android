@@ -1,9 +1,7 @@
 package com.musicinstrumentstore.network_service;
 
-import android.content.Context;
-
 import com.musicinstrumentstore.network_service.api_interface.AuthApi;
-import com.musicinstrumentstore.network_service.dto.TokenResponseDto;
+import com.musicinstrumentstore.network_service.dto.response.TokenResponseDto;
 
 import java.io.IOException;
 

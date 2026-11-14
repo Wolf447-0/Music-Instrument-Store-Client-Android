@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +17,8 @@ import android.widget.Toast;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.musicinstrumentstore.R;
 import com.musicinstrumentstore.adapter.CatalogAdapter;
-import com.musicinstrumentstore.adapter.ProductCard;
 import com.musicinstrumentstore.network_service.RetrofitClient;
-import com.musicinstrumentstore.network_service.dto.CatalogProductsResponseDto;
+import com.musicinstrumentstore.network_service.dto.response.CatalogProductsResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,16 @@ public class CatalogFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         products = new ArrayList<>();
 
-        catalogAdapter = new CatalogAdapter(getContext(), products);
+        CatalogAdapter.OnProductCardClickListener onProductCardClickListener = new CatalogAdapter.OnProductCardClickListener() {
+            @Override
+            public void onProductCardClick(CatalogProductsResponseDto productCard, int position) {
+                Bundle id = new Bundle();
+                id.putInt("Product_id", productCard.getId());
+                Navigation.findNavController(view).navigate(R.id.product_card, id);
+            }
+        };
+
+        catalogAdapter = new CatalogAdapter(getContext(), products,onProductCardClickListener);
         shimmerLayout = view.findViewById(R.id.shimmerLayout);
 
         catalogRecycler = view.findViewById(R.id.catalog_recycler);

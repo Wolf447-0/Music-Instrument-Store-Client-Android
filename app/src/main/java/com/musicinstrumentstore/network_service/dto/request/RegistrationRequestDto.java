@@ -1,7 +1,4 @@
-package com.musicinstrumentstore.network_service.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
+package com.musicinstrumentstore.network_service.dto.request;
 
 public class RegistrationRequestDto {
     private String username;

@@ -11,17 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.musicinstrumentstore.R;
-import com.musicinstrumentstore.network_service.RetrofitClient;
-import com.musicinstrumentstore.network_service.dto.CatalogProductsResponseDto;
+import com.musicinstrumentstore.network_service.dto.response.CatalogProductsResponseDto;
 
 import java.util.List;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
+   public interface OnProductCardClickListener{
+        void onProductCardClick(CatalogProductsResponseDto productCard, int position);
+    }
+    private final OnProductCardClickListener onProductCardClickListener;
     private final LayoutInflater inflater;
     private final List<CatalogProductsResponseDto> products;
     private final String BASE_URL = "http://192.168.100.212:8080";
 
-    public CatalogAdapter(Context context, List<CatalogProductsResponseDto> products) {
+    public CatalogAdapter(Context context, List<CatalogProductsResponseDto> products, OnProductCardClickListener onProductCardClickListener ) {
+        this.onProductCardClickListener = onProductCardClickListener;
         this.products = products;
         this.inflater = LayoutInflater.from(context);
     }
@@ -43,6 +47,16 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         holder.productName.setText(productCard.getProductName());
         holder.productCategory.setText(productCard.getProductCategory());
         holder.productPrice.setText(productCard.getProductPrice());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = holder.getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    onProductCardClickListener.onProductCardClick(products.get(pos), pos);
+                }
+            }
+        });
 
     }
 

@@ -1,8 +1,8 @@
 package com.musicinstrumentstore.network_service.api_interface;
 
-import com.musicinstrumentstore.network_service.dto.LogInRequestDto;
-import com.musicinstrumentstore.network_service.dto.RegistrationRequestDto;
-import com.musicinstrumentstore.network_service.dto.TokenResponseDto;
+import com.musicinstrumentstore.network_service.dto.request.LogInRequestDto;
+import com.musicinstrumentstore.network_service.dto.request.RegistrationRequestDto;
+import com.musicinstrumentstore.network_service.dto.response.TokenResponseDto;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
