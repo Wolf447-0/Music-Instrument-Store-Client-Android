@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         //для теста авторизации
-        TokenManager.getInstance(this).clearTokens();
+//        TokenManager.getInstance(this).clearTokens();
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.register || destination.getId() == R.id.log_in || destination.getId() == R.id.auth) {

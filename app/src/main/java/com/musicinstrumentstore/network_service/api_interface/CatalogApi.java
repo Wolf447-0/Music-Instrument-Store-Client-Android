@@ -18,6 +18,12 @@ public interface CatalogApi {
             @Query("size") int size
     );
 
+    @GET("/catalog/category/{name}")
+    Call<List<CatalogProductsResponseDto>> getAllFromCategory(
+            @Path("name") String categoryName,
+            @Query("page") int page,
+            @Query("size") int size);
+
     @GET("/catalog/product/{id}")
     Call<ProductCardResponseDto> getProduct(@Path("id") int id);
 }

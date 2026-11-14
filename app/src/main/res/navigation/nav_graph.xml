@@ -65,6 +65,11 @@
         android:id="@+id/navigation_category"
         android:name="com.musicinstrumentstore.fragment.CategoryFragment">
 
+        <action
+            android:id="@+id/category_to_catalog"
+            app:destination="@+id/catalog"
+            />
+
     </fragment>
 
     <fragment

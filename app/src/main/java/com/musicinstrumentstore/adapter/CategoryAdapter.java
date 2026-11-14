@@ -12,15 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.musicinstrumentstore.R;
+import com.musicinstrumentstore.network_service.dto.response.CatalogProductsResponseDto;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+    public interface OnCategoryCardClickListener{
+        void onCategoryCardClick(CategoryCard categoryCard, int position);
+    }
 
+    private final OnCategoryCardClickListener onCategoryCardClickListener;
     private final LayoutInflater inflater;
     private final List<CategoryCard> categories;
 
-    public CategoryAdapter(Context context, List<CategoryCard> categories) {
+    public CategoryAdapter(Context context, List<CategoryCard> categories,OnCategoryCardClickListener onCategoryCardClickListener) {
+        this.onCategoryCardClickListener = onCategoryCardClickListener;
         this.inflater = LayoutInflater.from(context);
         this.categories = categories;
     }
@@ -36,6 +42,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         CategoryCard category = categories.get(position);
         holder.imageView.setImageResource(category.getImage_flag());
         holder.textView.setText(category.getCategory_name());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = holder.getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    onCategoryCardClickListener.onCategoryCardClick(categories.get(pos), pos);
+                }
+            }
+        });
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +39,15 @@ public class CategoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        categoryAdapter = new CategoryAdapter(getContext(),getAllCategory());
+        CategoryAdapter.OnCategoryCardClickListener onCategoryCardClickListener = new CategoryAdapter.OnCategoryCardClickListener() {
+            @Override
+            public void onCategoryCardClick(CategoryCard categoryCard, int position) {
+                Bundle categoryName = new Bundle();
+                categoryName.putString("CategoryName", categoryCard.getCategory_name());
+                Navigation.findNavController(view).navigate(R.id.category_to_catalog,categoryName);
+            }
+        };
+        categoryAdapter = new CategoryAdapter(getContext(),getAllCategory(),onCategoryCardClickListener);
         recyclerView = view.findViewById(R.id.category_recycler);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);

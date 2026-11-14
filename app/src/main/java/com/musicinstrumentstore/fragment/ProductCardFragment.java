@@ -84,4 +84,20 @@ public class ProductCardFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (shimmerLayout != null && shimmerLayout.getVisibility() == View.VISIBLE) {
+            shimmerLayout.startShimmer();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (shimmerLayout != null) {
+            shimmerLayout.stopShimmer();
+        }
+        super.onPause();
+    }
 }

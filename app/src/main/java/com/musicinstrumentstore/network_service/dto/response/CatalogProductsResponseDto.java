@@ -2,14 +2,14 @@ package com.musicinstrumentstore.network_service.dto.response;
 
 public class CatalogProductsResponseDto {
     private int id;
-    private String ImageUrl;
+    private String imageUrl;
     private String productName;
     private String productCategory;
     private String productPrice;
 
     public CatalogProductsResponseDto(int id,String imageUrl, String productName, String productPrice, String productCategory) {
         this.id = id;
-        ImageUrl = imageUrl;
+        this.imageUrl = imageUrl;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productCategory = productCategory;
@@ -19,7 +19,7 @@ public class CatalogProductsResponseDto {
         return id;
     }
     public String getImageUrl() {
-        return ImageUrl;
+        return imageUrl;
     }
 
     public String getProductName() {
