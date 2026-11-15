@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -80,7 +81,7 @@ public class ProductCardFragment extends Fragment {
                     shimmerLayout.stopShimmer();
                     shimmerLayout.setVisibility(View.GONE);
                 }
-
+                Toast.makeText(getContext(), "Ошибка сети", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -65,6 +65,28 @@ public class CatalogFragment extends Fragment {
                 id.putInt("Product_id", productCard.getId());
                 Navigation.findNavController(view).navigate(R.id.product_card, id);
             }
+
+            @Override
+            public void onAddToBasketProductCardClick(int productId) {
+               RetrofitClient.getInstance(getContext()).getCatalogApi().addToCart(productId)
+                       .enqueue(new Callback<Void>() {
+                           @Override
+                           public void onResponse(Call<Void> call, Response<Void> response) {
+                               if(response.isSuccessful()) {
+                                   Toast.makeText(getContext(), "Товар добавлен в корзину", Toast.LENGTH_SHORT).show();
+                               }
+                               else {
+                                   Toast.makeText(getContext(), "Что-то пошло не так", Toast.LENGTH_SHORT).show();
+                               }
+                           }
+
+                           @Override
+                           public void onFailure(Call<Void> call, Throwable t) {
+                               Toast.makeText(getContext(), "Ошибка сети", Toast.LENGTH_SHORT).show();
+                           }
+                       });
+            }
+
         };
 
         catalogAdapter = new CatalogAdapter(getContext(), products,onProductCardClickListener);

@@ -52,6 +52,10 @@
             android:id="@+id/catalog_to_product_card"
             app:destination="@+id/product_card"
             />
+        <action
+            android:id="@+id/catalog_to_basket"
+            app:destination="@+id/navigation_basket"
+            />
 
     </fragment>
 
@@ -75,6 +79,10 @@
     <fragment
         android:id="@+id/navigation_basket"
         android:name="com.musicinstrumentstore.fragment.BasketFragment">
+        <action
+            android:id="@+id/basket_to_product_card"
+            app:destination="@+id/product_card"
+            />
 
     </fragment>
 

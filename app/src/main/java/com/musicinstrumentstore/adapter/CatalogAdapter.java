@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 import com.musicinstrumentstore.R;
 import com.musicinstrumentstore.network_service.dto.response.CatalogProductsResponseDto;
 
@@ -18,6 +19,8 @@ import java.util.List;
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
    public interface OnProductCardClickListener{
         void onProductCardClick(CatalogProductsResponseDto productCard, int position);
+       void onAddToBasketProductCardClick(int productId);
+
     }
     private final OnProductCardClickListener onProductCardClickListener;
     private final LayoutInflater inflater;
@@ -58,6 +61,16 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             }
         });
 
+        holder.addToBasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = holder.getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    onProductCardClickListener.onAddToBasketProductCardClick(products.get(pos).getId());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -80,6 +93,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView productName, productCategory, productPrice;
+        private MaterialButton addToBasket;
 
         ViewHolder(View view) {
             super(view);
@@ -87,6 +101,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             productName = view.findViewById(R.id.tvProductName);
             productCategory = view.findViewById(R.id.tvProductCategory);
             productPrice = view.findViewById(R.id.tvProductPrice);
+            addToBasket = view.findViewById(R.id.add_to_basket);
         }
     }
 }

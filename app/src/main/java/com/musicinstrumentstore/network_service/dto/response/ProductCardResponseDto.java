@@ -1,18 +1,29 @@
 package com.musicinstrumentstore.network_service.dto.response;
 
 public class ProductCardResponseDto {
+
+    private int id;
     private String imageUrl;
     private String name;
     private String price;
     private String categoryName;
     private String description;
 
-    public ProductCardResponseDto(String imageUrl, String name, String price, String categoryName, String description) {
+    public ProductCardResponseDto(int id,String imageUrl, String name, String price, String categoryName, String description) {
+        this.id = id;
         this.imageUrl = imageUrl;
         this.name = name;
         this.price = price;
         this.categoryName = categoryName;
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {

@@ -7,6 +7,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -26,4 +27,11 @@ public interface CatalogApi {
 
     @GET("/catalog/product/{id}")
     Call<ProductCardResponseDto> getProduct(@Path("id") int id);
+
+    @POST("/cart/add/{id}")
+    Call<Void> addToCart(@Path("id") int id);
+
+    @GET("/cart/products")
+    Call<List<ProductCardResponseDto>> getAllBasketProduct();
+
 }
