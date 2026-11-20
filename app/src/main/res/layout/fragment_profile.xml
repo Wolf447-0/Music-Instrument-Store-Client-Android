@@ -1,14 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.ProfileFragment">
+    android:layout_height="360dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="4dp">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Профиль"
-        android:textSize="26sp"/>
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="16dp">
 
-</FrameLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#D3D0D0"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RoundedCorners" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Имя пользователя"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="номер телефона"
+            android:textColor="#949393"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/change_data"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:backgroundTint="#806200EE"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/profile_edit"
+                    app:iconGravity="textEnd"
+                    app:iconSize="32dp"
+                    app:iconTint="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Изменить"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/payment"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:backgroundTint="#806200EE"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/payment"
+                    app:iconGravity="textEnd"
+                    app:iconSize="32dp"
+                    app:iconTint="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Оплата"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/settings"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    app:backgroundTint="#806200EE"
+                    app:cornerRadius="10dp"
+                    app:icon="@drawable/settings"
+                    app:iconGravity="textEnd"
+                    app:iconSize="32dp"
+                    app:iconTint="@null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Настройки"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:shimmer_duration="1000"
+        app:shimmer_auto_start="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_view"/>
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/skelet" />
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/skelet" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/skelet" />
+
+                <View
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/skelet" />
+
+                <View
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/skelet" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="12dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/skelet" />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="12dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/skelet" />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="12dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/skelet" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+</androidx.cardview.widget.CardView>

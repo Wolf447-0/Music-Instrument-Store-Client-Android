@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.MusicInstrumentStore" parent="Base.Theme.MusicInstrumentStore" />
+
+    <style name="RoundedCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50dp</item>
+    </style>
+
 </resources>
